@@ -18,7 +18,7 @@ var LoadQueueLoader = require('react-loadqueueloader');
 
 <LoadQueueLoader
   src="/path/to/image.jpg"
-  priority=1
+  priority={ 1 }
   loader={ React.DOM.img }
 />
 
