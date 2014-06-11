@@ -55,6 +55,16 @@ describe 'ReactLoadQueueLoader', ->
     assert.equal queue._loadResults[0].priority(), 1,
       'Expected priority to change to 1'
 
+  it 'renders a loader not in a load queue with a src', (done) ->
+    React.renderComponent (ReactLoadQueueLoader
+      src: 'test.png'
+      loader: (props) ->
+        if props.src
+          assert.equal props.src, 'test.png', 'Expected loader to have src'
+          done()
+        (img null)
+    ), div
+
   it 'renders a loader in a load queue without a src', ->
     React.renderComponent (component null), div
     image = div.getElementsByTagName('img')[0]

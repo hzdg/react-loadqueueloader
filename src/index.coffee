@@ -50,30 +50,34 @@ module.exports = LoadQueueLoader = React.createClass
     else if nextProps.priority isnt @props.priority
       @state.loadResult?.priority nextProps.priority
   enqueueLoad: (src, priority) ->
-    loader = (callback) =>
-      # If the component has been unmounted since the load was enqueued, don't
-      # bother starting the load now.
-      return unless @isMounted()
+    if @context?.loadQueue?
+      loader = (callback) =>
+        # If the component has been unmounted since the load was enqueued, don't
+        # bother starting the load now.
+        return unless @isMounted()
+        @setState
+          status: Status.LOADING
+          load: {src, callback}
+      loadResult = @context.loadQueue.enqueue loader, {priority}
+      @setState {loadResult}
+    else
       @setState
         status: Status.LOADING
-        load: {src, callback}
-    loadResult = @context.loadQueue.enqueue loader, {priority}
-    @setState {loadResult}
+        load: {src}
   handleLoad: (args...) ->
-    @state.load.callback args...
+    @state.load.callback? args...
     # If the component has been unmounted since the load was enqueued, don't
     # bother handling the load now.
     return unless @isMounted()
     @setState status: Status.LOADED, => @props.onLoad? args...
   handleError: (args...) ->
-    @state.load.callback args...
+    @state.load.callback? args...
     # If the component has been unmounted since the load was enqueued, don't
     # bother handling the error now.
     return unless @isMounted()
     @setState status: Status.FAILED, => @props.onError? args...
   render: ->
-    (@props.loader
+    @props.loader
       src: @state.load?.src
       onLoad: @handleLoad
       onError: @handleError
-    )
