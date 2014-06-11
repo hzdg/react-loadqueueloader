@@ -1,0 +1,29 @@
+{
+  "name": "react-loadqueueloader",
+  "version": "0.0.0",
+  "authors": [
+    "Eric Eldredge <lettertwo@gmail.com>"
+  ],
+  "description": "A React component for managing loads with a load queue",
+  "main": "./standalone/react-loadqueueloader.js",
+  "keywords": [
+    "react-component",
+    "react",
+    "loader",
+    "load",
+    "queue",
+    "queueup",
+    "component"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/hzdg/react-loadqueueloader",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test"
+  ],
+  "devDependencies": {
+    "react": "~0.10.0"
+  }
+}
