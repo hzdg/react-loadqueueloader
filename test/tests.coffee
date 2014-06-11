@@ -54,3 +54,24 @@ describe 'ReactLoadQueueLoader', ->
     React.renderComponent (component src: 'test.png', priority: 1), div
     assert.equal queue._loadResults[0].priority(), 1,
       'Expected priority to change to 1'
+
+  it 'renders a loader in a load queue without a src', ->
+    React.renderComponent (component null), div
+    image = div.getElementsByTagName('img')[0]
+    assert.notOk image.attributes.src, 'Expected loader not to have src'
+
+  it 'renders a loader in a load queue with a src when dequeued', (done) ->
+    React.renderComponent React.withContext(
+      loadQueue: queue
+      -> (ReactLoadQueueLoader
+        src: 'test.png'
+        loader: (props) ->
+          if props.src
+            assert.equal props.src, 'test.png', 'Expected loader to have src'
+            done()
+          (img null)
+      )),
+      div
+    image = div.getElementsByTagName('img')[0]
+    assert.notOk image.attributes.src, 'Expected loader not to have src'
+    queue.run()
