@@ -1,4 +1,5 @@
 React = require 'react'
+LoaderMixin = require 'react-loadermixin'
 
 {PropTypes} = React
 {span, img} = React.DOM
@@ -20,13 +21,10 @@ ContextTypes =
 
 module.exports = LoadQueueLoader = React.createClass
   displayName: 'LoadQueueLoader'
-  statics: {Status}
+  mixins: [LoaderMixin]
   propTypes:
     loader: PropTypes.func.isRequired
-    src: PropTypes.string
     priority: PropTypes.number
-    onLoad: PropTypes.func
-    onError: PropTypes.func
   contextTypes:
     loadQueue: ContextTypes.loadQueue
   getInitialState: ->
@@ -64,20 +62,18 @@ module.exports = LoadQueueLoader = React.createClass
       @setState
         status: Status.LOADING
         load: {src}
-  handleLoad: (args...) ->
-    @state.load.callback? args...
+  loaderDidLoad: (args...) ->
+    @state.load.callback? null, args...
     # If the component has been unmounted since the load was enqueued, don't
     # bother handling the load now.
     return unless @isMounted()
-    @setState status: Status.LOADED, => @props.onLoad? args...
-  handleError: (args...) ->
+    @setState status: Status.LOADED
+  loaderDidError: (args...) ->
     @state.load.callback? args...
     # If the component has been unmounted since the load was enqueued, don't
     # bother handling the error now.
     return unless @isMounted()
-    @setState status: Status.FAILED, => @props.onError? args...
+    @setState status: Status.FAILED
   render: ->
-    @props.loader
-      src: @state.load?.src
-      onLoad: @handleLoad
-      onError: @handleError
+    if not @context.loadQueue or @state.load? then @renderLoader @props.loader
+    else new @props.loader

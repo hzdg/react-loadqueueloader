@@ -76,7 +76,7 @@ describe 'ReactLoadQueueLoader', ->
       -> (ReactLoadQueueLoader
         src: 'test.png'
         loader: (props) ->
-          if props.src
+          if props?.src
             assert.equal props.src, 'test.png', 'Expected loader to have src'
             done()
           (img null)

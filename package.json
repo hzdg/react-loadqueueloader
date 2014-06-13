@@ -41,10 +41,13 @@
     "gulp-connect": "^2.0.5",
     "open": "0.0.5",
     "chai": "^1.9.1",
-    "mocha": "^1.20.0"
+    "mocha": "^1.20.0",
+    "envify": "^1.2.1",
+    "react-loadermixin": "^1.0.1"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": "*",
+    "react-loadermixin": "*"
   },
   "browserify-shim": {
     "react": "global:React"
