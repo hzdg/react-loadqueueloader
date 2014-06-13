@@ -64,14 +64,13 @@ Context
   </thead>
   <tbody>
     <tr>
-      <td>`loadQueue`</td>
+      <td><code>loadQueue</code></td>
       <td>object</td>
       <td>An object that manages loads in a queue. It is expected to have an
-          `enqueue` method that takes a function that performs the load. When
-          the load queue is ready to load an asset, it should call the provided
-          function, passing it a callback. That callback will be called when the
-          load completes (or errors). See [queueup.js] for an implementation of
-          the expected interface.</td>
+          <code>enqueue</code> method that takes a function that performs the
+          load. When the load queue is ready to load an asset, it should call
+          the provided function, passing it a callback. That callback will be
+          called when the load completes or errors.</td>
     </tr>
   </tbody>
 </table>
@@ -88,31 +87,31 @@ Props
   </thead>
   <tbody>
     <tr>
-      <td>`loader`</td>
+      <td><code>loader</code></td>
       <td>function</td>
       <td>A React class or other function that returns a component instance
-          that loads a `src`. The instance should also accept `onLoad`
-          and `onError` callbacks. Required.</td>
+          that loads a <code>src</code>. The instance should also accept
+          <code>onLoad</code> and <code>onError</code> callbacks. Required.</td>
     </tr>
     <tr>
-      <td>`src`</td>
+      <td><code>src</code></td>
       <td>string</td>
       <td>The URL of the image to be loaded.</td>
     </tr>
     <tr>
-      <td>`priority`</td>
+      <td><code>priority</code></td>
       <td>number</td>
       <td>The priority to assign to this load, relative to other loads in the
-          queue. This prop has no effect if there is no `loadQueue` in the
-          component context. Defaults to `0`</td>
+          queue. This prop has no effect if there is no <code>loadQueue</code>
+          in the component context. Defaults to <code>0</code></td>
     </tr>
     <tr>
-      <td>`onLoad`</td>
+      <td><code>onLoad</code></td>
       <td>function</td>
       <td>An optional callback to be called when the load finishes.</td>
     </tr>
     <tr>
-      <td>`onError`</td>
+      <td><code>onError</code></td>
       <td>function</td>
       <td>An optional callback to be called if the load fails.</td>
     </tr>
