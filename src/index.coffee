@@ -1,4 +1,4 @@
-React = require 'react'
+React = require 'React'
 LoaderMixin = require 'react-loadermixin'
 
 {PropTypes} = React
