@@ -76,4 +76,4 @@ module.exports = LoadQueueLoader = React.createClass
     @setState status: Status.FAILED
   render: ->
     if not @context.loadQueue or @state.load? then @renderLoader @props.loader
-    else new @props.loader
+    else @props.loader()
