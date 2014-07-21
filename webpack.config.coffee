@@ -9,7 +9,7 @@ module.exports =
     library: 'ReactLoadQueueLoader'
     libraryTarget: 'umd'
     target: 'web'
-  externals: ['React']
+  externals: ['React', react: 'React']
   module:
     loaders: [
       {test: /\.coffee$/, loader: 'coffee'}
