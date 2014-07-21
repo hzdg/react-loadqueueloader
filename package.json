@@ -1,6 +1,6 @@
 {
   "name": "react-loadqueueloader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component for managing loads with a load queue",
   "main": "./lib/index.js",
   "scripts": {
